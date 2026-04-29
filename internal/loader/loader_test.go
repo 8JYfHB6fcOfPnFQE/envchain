@@ -73,3 +73,18 @@ func TestLoad_FileNotFound(t *testing.T) {
 		t.Fatal("expected error for missing file, got nil")
 	}
 }
+
+func TestLoad_EmptyValue(t *testing.T) {
+	path := writeTempFile(t, "EMPTY=\nALSO_EMPTY=\"\"\n")
+	l := loader.New(path)
+	got, err := l.Load()
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if got["EMPTY"] != "" {
+		t.Errorf("expected empty string for EMPTY, got %q", got["EMPTY"])
+	}
+	if got["ALSO_EMPTY"] != "" {
+		t.Errorf("expected empty string for ALSO_EMPTY, got %q", got["ALSO_EMPTY"])
+	}
+}
