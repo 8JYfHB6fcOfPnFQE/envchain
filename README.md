@@ -45,6 +45,9 @@ envchain validate --chain production
 
 # Run a command within a validated environment context
 envchain run --chain production -- ./myapp serve
+
+# List all defined chains in the config file
+envchain list
 ```
 
 If any required variables are missing, `envchain` will report them and exit with a non-zero status:
@@ -53,6 +56,16 @@ If any required variables are missing, `envchain` will report them and exit with
 ✗ Missing variables for chain "production":
   - API_KEY
   - SECRET_TOKEN
+```
+
+---
+
+## Configuration
+
+By default, `envchain` looks for `.envchain.yaml` in the current directory. You can specify a different config file using the `--config` flag:
+
+```bash
+envchain validate --chain production --config /path/to/myconfig.yaml
 ```
 
 ---
