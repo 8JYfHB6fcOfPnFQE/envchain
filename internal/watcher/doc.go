@@ -5,6 +5,13 @@
 // changes are detected — added, removed, or modified keys — a user-supplied
 // DriftHandler callback is invoked with the full Diff result.
 //
+// Lifecycle
+//
+// Call Start to begin periodic polling. The watcher runs in a background
+// goroutine and the caller retains full control over shutdown via Stop, which
+// blocks until the background goroutine has exited. It is safe to call Stop
+// multiple times.
+//
 // Example usage:
 //
 //	w, err := watcher.New(
