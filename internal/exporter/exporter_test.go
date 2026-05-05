@@ -76,3 +76,14 @@ func TestWrite_SortedOutput(t *testing.T) {
 		t.Errorf("expected sorted output, got: %v", lines)
 	}
 }
+
+func TestWrite_EmptyMap(t *testing.T) {
+	for _, f := range []exporter.Format{exporter.FormatDotenv, exporter.FormatExport, exporter.FormatJSON} {
+		var sb strings.Builder
+		e, _ := exporter.New(f, &sb)
+		err := e.Write(map[string]string{})
+		if err != nil {
+			t.Errorf("format %q: unexpected error writing empty map: %v", f, err)
+		}
+	}
+}
