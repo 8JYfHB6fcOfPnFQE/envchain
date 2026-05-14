@@ -9,6 +9,16 @@
 //  2. The Exporter writes the resolved key-value map to the configured
 //     output in the chosen format (dotenv, export, or JSON).
 //
+// # Configuration
+//
+// A Pipeline is constructed via [New] with a [Config] struct. Both Resolver
+// and Exporter fields are required; [New] returns an error if either is nil.
+//
+// # Context chaining
+//
+// Contexts are resolved left-to-right, so later contexts take precedence
+// over earlier ones when the same key appears in multiple contexts.
+//
 // Example usage:
 //
 //	p, err := pipeline.New(pipeline.Config{
